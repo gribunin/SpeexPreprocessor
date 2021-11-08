@@ -1,0 +1,13 @@
+﻿bin
+obj
+packages
+*.suo
+*.log
+*.user
+*.pdb
+.vs
+node_modules
+Debug
+Release
+publish
+logs
