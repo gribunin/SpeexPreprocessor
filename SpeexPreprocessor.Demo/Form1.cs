@@ -33,6 +33,8 @@ namespace SpeexPreprocessor.Demo
         private byte[] _samplesBuffer = Array.Empty<byte>();
         private byte[] _speexFrameBuffer = Array.Empty<byte>();
 
+        private bool _ignoreControlChanges;
+
         private const int PREPROCESSOR_FRAME_SIZE_MS = 20; // Speex preprocessor frame size in milliseconds
 
         public MainForm()
@@ -50,6 +52,26 @@ namespace SpeexPreprocessor.Demo
             if (cbPlayback.Items.Count > 0)
             {
                 cbPlayback.SelectedIndex = 0;
+            }
+        }
+
+        private void InitializePreprocessControls()
+        {
+            _ignoreControlChanges = true;
+            try
+            {
+                cbDereverb.Checked = _preprocessor.Dereverb;
+                cbDenoise.Checked = _preprocessor.Denoise;
+
+                cbAgc.Checked = _preprocessor.Agc = true;
+                tbAgcLevel.Value = (int)_preprocessor.AgcLevel;
+                tbAgcMaxGain.Value = _preprocessor.AgcMaxGain;
+                tbAgcIncrement.Value = _preprocessor.AgcIncrement;
+                tbAgcDecrement.Value = _preprocessor.AgcDecrement;
+            }
+            finally
+            {
+                _ignoreControlChanges = false;
             }
         }
 
@@ -131,6 +153,8 @@ namespace SpeexPreprocessor.Demo
 
             StartCapture(captureDevice.Device);
             StartPlayback(playbackDevice.Device, _wasapiCapture.WaveFormat);
+
+            InitializePreprocessControls();
         }
 
         private void StartCapture(MMDevice device)
@@ -157,15 +181,23 @@ namespace SpeexPreprocessor.Demo
 
         private void StopCapture()
         {
-            _wasapiCapture.StopRecording();
-            _wasapiCapture.Dispose();
+            if (_wasapiCapture != null)
+            {
+                _wasapiCapture.StopRecording();
+                _wasapiCapture.Dispose();
+            }
+
             _wasapiCapture = null;
         }
 
         private void StopPlayback()
         {
-            _wasapiOut.Stop();
-            _wasapiOut.Dispose();
+            if (_wasapiOut != null)
+            {
+                _wasapiOut.Stop();
+                _wasapiOut.Dispose();
+            }
+
             _wasapiOut = null;
         }
 
@@ -223,9 +255,30 @@ namespace SpeexPreprocessor.Demo
                 Stop();
             }
 
-            btnCapture.Text = _wasapiCapture == null ? "Start" : "Stop";
-            cbCapture.Enabled = _wasapiCapture == null;
-            cbPlayback.Enabled = _wasapiCapture == null;
+            bool isStopped = _wasapiCapture == null;
+            btnCapture.Text = isStopped ? "Start" : "Stop";
+            cbCapture.Enabled = isStopped;
+            cbPlayback.Enabled = isStopped;
+            gbPreprocessor.Enabled = !isStopped;
+        }
+
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Stop();
+        }
+
+        private void PreprocessControlValueChanged(object sender, EventArgs e)
+        {
+            if (!_ignoreControlChanges && _preprocessor != null)
+            {
+                _preprocessor.Agc = cbAgc.Checked;
+                _preprocessor.Dereverb = cbDereverb.Checked;
+                _preprocessor.Denoise = cbDenoise.Checked;
+                _preprocessor.AgcLevel = tbAgcLevel.Value;
+                _preprocessor.AgcMaxGain = tbAgcMaxGain.Value;
+                _preprocessor.AgcIncrement = tbAgcIncrement.Value;
+                _preprocessor.AgcDecrement = tbAgcDecrement.Value;
+            }
         }
     }
 }

@@ -36,21 +36,23 @@ namespace SpeexPreprocessor.Demo
             this.cbPlayback = new System.Windows.Forms.ComboBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.btnCapture = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.cbAgc = new System.Windows.Forms.CheckBox();
-            this.tbAgcLevel = new System.Windows.Forms.TrackBar();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.tbAgcMaxGain = new System.Windows.Forms.TrackBar();
-            this.label5 = new System.Windows.Forms.Label();
-            this.tbAgcIncrement = new System.Windows.Forms.TrackBar();
+            this.gbPreprocessor = new System.Windows.Forms.GroupBox();
             this.label6 = new System.Windows.Forms.Label();
             this.tbAgcDecrement = new System.Windows.Forms.TrackBar();
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAgcLevel)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAgcMaxGain)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAgcIncrement)).BeginInit();
+            this.label5 = new System.Windows.Forms.Label();
+            this.tbAgcIncrement = new System.Windows.Forms.TrackBar();
+            this.label4 = new System.Windows.Forms.Label();
+            this.tbAgcMaxGain = new System.Windows.Forms.TrackBar();
+            this.label3 = new System.Windows.Forms.Label();
+            this.tbAgcLevel = new System.Windows.Forms.TrackBar();
+            this.cbAgc = new System.Windows.Forms.CheckBox();
+            this.cbDenoise = new System.Windows.Forms.CheckBox();
+            this.cbDereverb = new System.Windows.Forms.CheckBox();
+            this.gbPreprocessor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbAgcDecrement)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbAgcIncrement)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbAgcMaxGain)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbAgcLevel)).BeginInit();
             this.SuspendLayout();
             // 
             // cbCapture
@@ -116,59 +118,75 @@ namespace SpeexPreprocessor.Demo
             this.btnCapture.UseVisualStyleBackColor = true;
             this.btnCapture.Click += new System.EventHandler(this.button1_Click);
             // 
-            // groupBox1
+            // gbPreprocessor
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.gbPreprocessor.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.tbAgcDecrement);
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.tbAgcIncrement);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.tbAgcMaxGain);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.tbAgcLevel);
-            this.groupBox1.Controls.Add(this.cbAgc);
-            this.groupBox1.Location = new System.Drawing.Point(12, 224);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(594, 296);
-            this.groupBox1.TabIndex = 6;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Preprocessor options";
+            this.gbPreprocessor.Controls.Add(this.cbDereverb);
+            this.gbPreprocessor.Controls.Add(this.cbDenoise);
+            this.gbPreprocessor.Controls.Add(this.label6);
+            this.gbPreprocessor.Controls.Add(this.tbAgcDecrement);
+            this.gbPreprocessor.Controls.Add(this.label5);
+            this.gbPreprocessor.Controls.Add(this.tbAgcIncrement);
+            this.gbPreprocessor.Controls.Add(this.label4);
+            this.gbPreprocessor.Controls.Add(this.tbAgcMaxGain);
+            this.gbPreprocessor.Controls.Add(this.label3);
+            this.gbPreprocessor.Controls.Add(this.tbAgcLevel);
+            this.gbPreprocessor.Controls.Add(this.cbAgc);
+            this.gbPreprocessor.Enabled = false;
+            this.gbPreprocessor.Location = new System.Drawing.Point(12, 224);
+            this.gbPreprocessor.Name = "gbPreprocessor";
+            this.gbPreprocessor.Size = new System.Drawing.Size(594, 296);
+            this.gbPreprocessor.TabIndex = 6;
+            this.gbPreprocessor.TabStop = false;
+            this.gbPreprocessor.Text = "Preprocessor options";
             // 
-            // cbAgc
+            // label6
             // 
-            this.cbAgc.AutoSize = true;
-            this.cbAgc.Checked = true;
-            this.cbAgc.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbAgc.Location = new System.Drawing.Point(7, 20);
-            this.cbAgc.Name = "cbAgc";
-            this.cbAgc.Size = new System.Drawing.Size(86, 17);
-            this.cbAgc.TabIndex = 0;
-            this.cbAgc.Text = "Agc enabled";
-            this.cbAgc.UseVisualStyleBackColor = true;
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(7, 228);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(82, 13);
+            this.label6.TabIndex = 8;
+            this.label6.Text = "Agc decrement:";
             // 
-            // tbAgcLevel
+            // tbAgcDecrement
             // 
-            this.tbAgcLevel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.tbAgcDecrement.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbAgcLevel.LargeChange = 2;
-            this.tbAgcLevel.Location = new System.Drawing.Point(7, 67);
-            this.tbAgcLevel.Minimum = 1;
-            this.tbAgcLevel.Name = "tbAgcLevel";
-            this.tbAgcLevel.Size = new System.Drawing.Size(581, 45);
-            this.tbAgcLevel.TabIndex = 1;
-            this.tbAgcLevel.Value = 1;
+            this.tbAgcDecrement.LargeChange = 2;
+            this.tbAgcDecrement.Location = new System.Drawing.Point(7, 241);
+            this.tbAgcDecrement.Maximum = 30;
+            this.tbAgcDecrement.Minimum = -60;
+            this.tbAgcDecrement.Name = "tbAgcDecrement";
+            this.tbAgcDecrement.Size = new System.Drawing.Size(581, 45);
+            this.tbAgcDecrement.TabIndex = 7;
+            this.tbAgcDecrement.Value = 30;
+            this.tbAgcDecrement.ValueChanged += new System.EventHandler(this.PreprocessControlValueChanged);
             // 
-            // label3
+            // label5
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(7, 54);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(54, 13);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Agc level:";
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(7, 170);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(78, 13);
+            this.label5.TabIndex = 6;
+            this.label5.Text = "Agc increment:";
+            // 
+            // tbAgcIncrement
+            // 
+            this.tbAgcIncrement.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbAgcIncrement.LargeChange = 2;
+            this.tbAgcIncrement.Location = new System.Drawing.Point(7, 183);
+            this.tbAgcIncrement.Maximum = 30;
+            this.tbAgcIncrement.Minimum = 1;
+            this.tbAgcIncrement.Name = "tbAgcIncrement";
+            this.tbAgcIncrement.Size = new System.Drawing.Size(581, 45);
+            this.tbAgcIncrement.TabIndex = 5;
+            this.tbAgcIncrement.Value = 1;
+            this.tbAgcIncrement.ValueChanged += new System.EventHandler(this.PreprocessControlValueChanged);
             // 
             // label4
             // 
@@ -191,55 +209,72 @@ namespace SpeexPreprocessor.Demo
             this.tbAgcMaxGain.Size = new System.Drawing.Size(581, 45);
             this.tbAgcMaxGain.TabIndex = 3;
             this.tbAgcMaxGain.Value = 1;
+            this.tbAgcMaxGain.ValueChanged += new System.EventHandler(this.PreprocessControlValueChanged);
             // 
-            // label5
+            // label3
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(7, 170);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(78, 13);
-            this.label5.TabIndex = 6;
-            this.label5.Text = "Agc increment:";
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(7, 54);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(54, 13);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Agc level:";
             // 
-            // tbAgcIncrement
+            // tbAgcLevel
             // 
-            this.tbAgcIncrement.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.tbAgcLevel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbAgcIncrement.LargeChange = 2;
-            this.tbAgcIncrement.Location = new System.Drawing.Point(7, 183);
-            this.tbAgcIncrement.Minimum = 1;
-            this.tbAgcIncrement.Name = "tbAgcIncrement";
-            this.tbAgcIncrement.Size = new System.Drawing.Size(581, 45);
-            this.tbAgcIncrement.TabIndex = 5;
-            this.tbAgcIncrement.Value = 1;
+            this.tbAgcLevel.LargeChange = 1000;
+            this.tbAgcLevel.Location = new System.Drawing.Point(7, 67);
+            this.tbAgcLevel.Maximum = 24000;
+            this.tbAgcLevel.Minimum = 1;
+            this.tbAgcLevel.Name = "tbAgcLevel";
+            this.tbAgcLevel.Size = new System.Drawing.Size(581, 45);
+            this.tbAgcLevel.SmallChange = 500;
+            this.tbAgcLevel.TabIndex = 1;
+            this.tbAgcLevel.TickFrequency = 1000;
+            this.tbAgcLevel.Value = 1;
+            this.tbAgcLevel.ValueChanged += new System.EventHandler(this.PreprocessControlValueChanged);
             // 
-            // label6
+            // cbAgc
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(7, 228);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(82, 13);
-            this.label6.TabIndex = 8;
-            this.label6.Text = "Agc decrement:";
+            this.cbAgc.AutoSize = true;
+            this.cbAgc.Location = new System.Drawing.Point(7, 20);
+            this.cbAgc.Name = "cbAgc";
+            this.cbAgc.Size = new System.Drawing.Size(45, 17);
+            this.cbAgc.TabIndex = 0;
+            this.cbAgc.Text = "Agc";
+            this.cbAgc.UseVisualStyleBackColor = true;
+            this.cbAgc.CheckedChanged += new System.EventHandler(this.PreprocessControlValueChanged);
             // 
-            // tbAgcDecrement
+            // cbDenoise
             // 
-            this.tbAgcDecrement.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbAgcDecrement.LargeChange = 2;
-            this.tbAgcDecrement.Location = new System.Drawing.Point(7, 241);
-            this.tbAgcDecrement.Minimum = 1;
-            this.tbAgcDecrement.Name = "tbAgcDecrement";
-            this.tbAgcDecrement.Size = new System.Drawing.Size(581, 45);
-            this.tbAgcDecrement.TabIndex = 7;
-            this.tbAgcDecrement.Value = 1;
+            this.cbDenoise.AutoSize = true;
+            this.cbDenoise.Location = new System.Drawing.Point(129, 20);
+            this.cbDenoise.Name = "cbDenoise";
+            this.cbDenoise.Size = new System.Drawing.Size(65, 17);
+            this.cbDenoise.TabIndex = 9;
+            this.cbDenoise.Text = "Denoise";
+            this.cbDenoise.UseVisualStyleBackColor = true;
+            this.cbDenoise.CheckedChanged += new System.EventHandler(this.PreprocessControlValueChanged);
+            // 
+            // cbDereverb
+            // 
+            this.cbDereverb.AutoSize = true;
+            this.cbDereverb.Location = new System.Drawing.Point(248, 19);
+            this.cbDereverb.Name = "cbDereverb";
+            this.cbDereverb.Size = new System.Drawing.Size(70, 17);
+            this.cbDereverb.TabIndex = 10;
+            this.cbDereverb.Text = "Dereverb";
+            this.cbDereverb.UseVisualStyleBackColor = true;
+            this.cbDereverb.CheckedChanged += new System.EventHandler(this.PreprocessControlValueChanged);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(618, 532);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.gbPreprocessor);
             this.Controls.Add(this.btnCapture);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.cbPlayback);
@@ -250,12 +285,13 @@ namespace SpeexPreprocessor.Demo
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Speex Preprocessor Demo";
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAgcLevel)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAgcMaxGain)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAgcIncrement)).EndInit();
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
+            this.gbPreprocessor.ResumeLayout(false);
+            this.gbPreprocessor.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbAgcDecrement)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbAgcIncrement)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbAgcMaxGain)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbAgcLevel)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -269,16 +305,18 @@ namespace SpeexPreprocessor.Demo
         private System.Windows.Forms.ComboBox cbPlayback;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button btnCapture;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox gbPreprocessor;
         private System.Windows.Forms.CheckBox cbAgc;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TrackBar tbAgcLevel;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TrackBar tbAgcIncrement;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TrackBar tbAgcMaxGain;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TrackBar tbAgcDecrement;
+        private System.Windows.Forms.TrackBar tbAgcLevel;
+        private System.Windows.Forms.CheckBox cbDereverb;
+        private System.Windows.Forms.CheckBox cbDenoise;
     }
 }
 

@@ -45,7 +45,18 @@ bool GetBoolValue(SpeexPreprocessState* state, int request)
 
 int GetIntValue(SpeexPreprocessState* state, int request)
 {
-	spx_int32_t val;
+	int val;
+	if (speex_preprocess_ctl(state, request, &val) != 0)
+	{
+		throw gcnew SpeexException();
+	}
+
+	return val;
+}
+
+int GetFloatValue(SpeexPreprocessState* state, int request)
+{
+	float val;
 	if (speex_preprocess_ctl(state, request, &val) != 0)
 	{
 		throw gcnew SpeexException();
@@ -71,6 +82,14 @@ void SetIntValue(SpeexPreprocessState* state, int value, int request)
 	}
 }
 
+void SetFloatValue(SpeexPreprocessState* state, float value, int request)
+{
+	if (speex_preprocess_ctl(state, request, &value) != 0)
+	{
+		throw gcnew SpeexException();
+	}
+}
+
 bool Preprocessor::Agc::get()
 {
 	return GetBoolValue(_state, SPEEX_PREPROCESS_GET_AGC);
@@ -78,17 +97,17 @@ bool Preprocessor::Agc::get()
 
 void Preprocessor::Agc::set(bool value)
 {
-	SetBoolValue(_state, SPEEX_PREPROCESS_SET_AGC, value);
+	SetBoolValue(_state, value, SPEEX_PREPROCESS_SET_AGC);
 }
 
-int Preprocessor::AgcLevel::get()
+float Preprocessor::AgcLevel::get()
 {
-	return GetIntValue(_state, SPEEX_PREPROCESS_GET_AGC_LEVEL);
+	return GetFloatValue(_state, SPEEX_PREPROCESS_GET_AGC_LEVEL);
 }
 
-void Preprocessor::AgcLevel::set(int value)
+void Preprocessor::AgcLevel::set(float value)
 {
-	SetIntValue(_state, SPEEX_PREPROCESS_SET_AGC_LEVEL, value);
+	SetFloatValue(_state, value, SPEEX_PREPROCESS_SET_AGC_LEVEL);
 }
 
 int Preprocessor::AgcIncrement::get()
@@ -98,7 +117,7 @@ int Preprocessor::AgcIncrement::get()
 
 void Preprocessor::AgcIncrement::set(int value)
 {
-	SetIntValue(_state, SPEEX_PREPROCESS_SET_AGC_INCREMENT, value);
+	SetIntValue(_state, value, SPEEX_PREPROCESS_SET_AGC_INCREMENT);
 }
 
 int Preprocessor::AgcDecrement::get()
@@ -108,7 +127,7 @@ int Preprocessor::AgcDecrement::get()
 
 void Preprocessor::AgcDecrement::set(int value)
 {
-	SetIntValue(_state, SPEEX_PREPROCESS_SET_AGC_DECREMENT, value);
+	SetIntValue(_state, value, SPEEX_PREPROCESS_SET_AGC_DECREMENT);
 }
 
 int Preprocessor::AgcMaxGain::get()
@@ -118,7 +137,7 @@ int Preprocessor::AgcMaxGain::get()
 
 void Preprocessor::AgcMaxGain::set(int value)
 {
-	SetIntValue(_state, SPEEX_PREPROCESS_SET_AGC_MAX_GAIN, value);
+	SetIntValue(_state, value, SPEEX_PREPROCESS_SET_AGC_MAX_GAIN);
 }
 
 bool Preprocessor::Denoise::get()
@@ -128,7 +147,7 @@ bool Preprocessor::Denoise::get()
 
 void Preprocessor::Denoise::set(bool value)
 {
-	SetBoolValue(_state, SPEEX_PREPROCESS_SET_DENOISE, value);
+	SetBoolValue(_state, value, SPEEX_PREPROCESS_SET_DENOISE);
 }
 
 bool Preprocessor::Dereverb::get()
@@ -138,5 +157,5 @@ bool Preprocessor::Dereverb::get()
 
 void Preprocessor::Dereverb::set(bool value)
 {
-	SetBoolValue(_state, SPEEX_PREPROCESS_SET_DEREVERB, value);
+	SetBoolValue(_state, value, SPEEX_PREPROCESS_SET_DEREVERB);
 }

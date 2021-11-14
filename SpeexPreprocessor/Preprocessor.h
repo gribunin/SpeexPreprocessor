@@ -40,9 +40,9 @@ namespace SpeexPreprocessor
 		/// <summary>
 		/// Preprocessor Automatic Gain Control level
 		/// </summary>
-		property int AgcLevel {
-			int get();
-			void set(int value);
+		property float AgcLevel {
+			float get();
+			void set(float value);
 		}
 
 		/// <summary>
