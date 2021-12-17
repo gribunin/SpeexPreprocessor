@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package >
+  <metadata>
+    <id>SpeexPreprocessor</id>
+    <version>1.0.0</version>
+    <title>Speex Preprocessor Wrapper</title>
+    <authors>Kirill Gribunin</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <projectUrl>https://github.com/gribunin/SpeexPreprocessor</projectUrl>
+    <description>.NET wrapper for speex preprocessor code from speex codec library.</description>
+    <releaseNotes>Initial release of SpeexPreprocessor wrapper.</releaseNotes>
+    <copyright>(c) 2021 by Kirill Gribunin</copyright>
+    <tags>Agc Speex Audio</tags>
+
+    <dependencies>
+      <group targetFramework=".NETFramework4.5">
+      </group>
+    </dependencies>
+  </metadata>
+
+  <files>
+    <file src="x64\Release\SpeexPreprocessor.dll" target="build\x64" />
+    <file src="x86\Release\SpeexPreprocessor.dll" target="build\x86" />
+    <file src="lib\net45\_._" target="lib\net45" />
+
+    <file src="SpeexPreprocessor.props" target="build\net45" />
+  </files>
+</package>

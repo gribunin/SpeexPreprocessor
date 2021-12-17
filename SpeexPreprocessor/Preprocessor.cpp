@@ -140,6 +140,11 @@ void Preprocessor::AgcMaxGain::set(int value)
 	SetIntValue(_state, value, SPEEX_PREPROCESS_SET_AGC_MAX_GAIN);
 }
 
+int Preprocessor::AgcGain::get()
+{
+	return GetIntValue(_state, SPEEX_PREPROCESS_GET_AGC_GAIN);
+}
+
 bool Preprocessor::Denoise::get()
 {
 	return GetBoolValue(_state, SPEEX_PREPROCESS_GET_DENOISE);

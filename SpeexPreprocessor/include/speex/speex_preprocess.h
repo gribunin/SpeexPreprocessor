@@ -211,6 +211,8 @@ int speex_preprocess_ctl(SpeexPreprocessState *st, int request, void *ptr);
 /** Get preprocessor Automatic Gain Control level (int32) */
 #define SPEEX_PREPROCESS_GET_AGC_TARGET 47
 
+#define SPEEX_PREPROCESS_GET_AGC_TARGET 47
+
 #ifdef __cplusplus
 }
 #endif

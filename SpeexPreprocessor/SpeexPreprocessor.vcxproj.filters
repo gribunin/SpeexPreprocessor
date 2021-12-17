@@ -204,11 +204,16 @@
     <ClInclude Include="SpeexException.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="speex\echo_diagnostic.m">
       <Filter>speex\src</Filter>
     </None>
+    <None Include="SpeexPreprocessor.nuspec" />
+    <None Include="SpeexPreprocessor.props" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="speex\preprocess.c">
@@ -343,5 +348,13 @@
     <ClCompile Include="SpeexException.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="AssemblyInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

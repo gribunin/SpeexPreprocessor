@@ -70,6 +70,13 @@ namespace SpeexPreprocessor
 		}
 
 		/// <summary>
+		/// Current AGC gain in percent 
+		/// </summary>
+		property int AgcGain {
+			int get();
+		}
+
+		/// <summary>
 		/// Preprocessor denoiser state
 		/// </summary>
 		property bool Denoise {

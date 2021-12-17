@@ -155,6 +155,8 @@ namespace SpeexPreprocessor.Demo
             StartPlayback(playbackDevice.Device, _wasapiCapture.WaveFormat);
 
             InitializePreprocessControls();
+
+            timer1.Enabled = true;
         }
 
         private void StartCapture(MMDevice device)
@@ -205,6 +207,8 @@ namespace SpeexPreprocessor.Demo
         {
             StopCapture();
             StopPlayback();
+
+            timer1.Enabled = false;
         }
 
         private void _wasapiCapture_DataAvailable(object sender, WaveInEventArgs e)
@@ -232,6 +236,7 @@ namespace SpeexPreprocessor.Demo
                 while (_speexFeedBuffer.Count >= _speexFrameSizeInBytes)
                 {
                     _speexFeedBuffer.Read(_speexFrameBuffer, 0, _speexFrameSizeInBytes);
+
                     _preprocessor.Run(_speexFrameBuffer);
 
                     PlayProcessedBuffer(_speexFrameBuffer);
@@ -265,6 +270,17 @@ namespace SpeexPreprocessor.Demo
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             Stop();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            tbInfo.Text = $@"AGC
+    Current gain: {_preprocessor?.AgcGain}
+    Level: {_preprocessor.AgcLevel}
+    Max gain: {_preprocessor.AgcMaxGain}
+    Increment: {_preprocessor.AgcIncrement}
+    Decrement: {_preprocessor.AgcDecrement}
+";
         }
 
         private void PreprocessControlValueChanged(object sender, EventArgs e)

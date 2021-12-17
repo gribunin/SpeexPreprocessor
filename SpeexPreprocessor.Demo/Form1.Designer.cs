@@ -29,6 +29,7 @@ namespace SpeexPreprocessor.Demo
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.cbCapture = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -37,6 +38,8 @@ namespace SpeexPreprocessor.Demo
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.btnCapture = new System.Windows.Forms.Button();
             this.gbPreprocessor = new System.Windows.Forms.GroupBox();
+            this.cbDereverb = new System.Windows.Forms.CheckBox();
+            this.cbDenoise = new System.Windows.Forms.CheckBox();
             this.label6 = new System.Windows.Forms.Label();
             this.tbAgcDecrement = new System.Windows.Forms.TrackBar();
             this.label5 = new System.Windows.Forms.Label();
@@ -46,8 +49,8 @@ namespace SpeexPreprocessor.Demo
             this.label3 = new System.Windows.Forms.Label();
             this.tbAgcLevel = new System.Windows.Forms.TrackBar();
             this.cbAgc = new System.Windows.Forms.CheckBox();
-            this.cbDenoise = new System.Windows.Forms.CheckBox();
-            this.cbDereverb = new System.Windows.Forms.CheckBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.tbInfo = new System.Windows.Forms.TextBox();
             this.gbPreprocessor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbAgcDecrement)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbAgcIncrement)).BeginInit();
@@ -62,7 +65,7 @@ namespace SpeexPreprocessor.Demo
             this.cbCapture.FormattingEnabled = true;
             this.cbCapture.Location = new System.Drawing.Point(12, 129);
             this.cbCapture.Name = "cbCapture";
-            this.cbCapture.Size = new System.Drawing.Size(389, 21);
+            this.cbCapture.Size = new System.Drawing.Size(423, 21);
             this.cbCapture.TabIndex = 0;
             this.cbCapture.ValueMember = "Device";
             // 
@@ -91,7 +94,7 @@ namespace SpeexPreprocessor.Demo
             this.cbPlayback.FormattingEnabled = true;
             this.cbPlayback.Location = new System.Drawing.Point(12, 178);
             this.cbPlayback.Name = "cbPlayback";
-            this.cbPlayback.Size = new System.Drawing.Size(389, 21);
+            this.cbPlayback.Size = new System.Drawing.Size(423, 21);
             this.cbPlayback.TabIndex = 3;
             this.cbPlayback.ValueMember = "Device";
             // 
@@ -137,10 +140,32 @@ namespace SpeexPreprocessor.Demo
             this.gbPreprocessor.Enabled = false;
             this.gbPreprocessor.Location = new System.Drawing.Point(12, 224);
             this.gbPreprocessor.Name = "gbPreprocessor";
-            this.gbPreprocessor.Size = new System.Drawing.Size(594, 296);
+            this.gbPreprocessor.Size = new System.Drawing.Size(423, 296);
             this.gbPreprocessor.TabIndex = 6;
             this.gbPreprocessor.TabStop = false;
             this.gbPreprocessor.Text = "Preprocessor options";
+            // 
+            // cbDereverb
+            // 
+            this.cbDereverb.AutoSize = true;
+            this.cbDereverb.Location = new System.Drawing.Point(248, 19);
+            this.cbDereverb.Name = "cbDereverb";
+            this.cbDereverb.Size = new System.Drawing.Size(70, 17);
+            this.cbDereverb.TabIndex = 10;
+            this.cbDereverb.Text = "Dereverb";
+            this.cbDereverb.UseVisualStyleBackColor = true;
+            this.cbDereverb.CheckedChanged += new System.EventHandler(this.PreprocessControlValueChanged);
+            // 
+            // cbDenoise
+            // 
+            this.cbDenoise.AutoSize = true;
+            this.cbDenoise.Location = new System.Drawing.Point(129, 20);
+            this.cbDenoise.Name = "cbDenoise";
+            this.cbDenoise.Size = new System.Drawing.Size(65, 17);
+            this.cbDenoise.TabIndex = 9;
+            this.cbDenoise.Text = "Denoise";
+            this.cbDenoise.UseVisualStyleBackColor = true;
+            this.cbDenoise.CheckedChanged += new System.EventHandler(this.PreprocessControlValueChanged);
             // 
             // label6
             // 
@@ -157,12 +182,12 @@ namespace SpeexPreprocessor.Demo
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbAgcDecrement.LargeChange = 2;
             this.tbAgcDecrement.Location = new System.Drawing.Point(7, 241);
-            this.tbAgcDecrement.Maximum = 30;
+            this.tbAgcDecrement.Maximum = -5;
             this.tbAgcDecrement.Minimum = -60;
             this.tbAgcDecrement.Name = "tbAgcDecrement";
-            this.tbAgcDecrement.Size = new System.Drawing.Size(581, 45);
+            this.tbAgcDecrement.Size = new System.Drawing.Size(410, 45);
             this.tbAgcDecrement.TabIndex = 7;
-            this.tbAgcDecrement.Value = 30;
+            this.tbAgcDecrement.Value = -5;
             this.tbAgcDecrement.ValueChanged += new System.EventHandler(this.PreprocessControlValueChanged);
             // 
             // label5
@@ -183,7 +208,7 @@ namespace SpeexPreprocessor.Demo
             this.tbAgcIncrement.Maximum = 30;
             this.tbAgcIncrement.Minimum = 1;
             this.tbAgcIncrement.Name = "tbAgcIncrement";
-            this.tbAgcIncrement.Size = new System.Drawing.Size(581, 45);
+            this.tbAgcIncrement.Size = new System.Drawing.Size(410, 45);
             this.tbAgcIncrement.TabIndex = 5;
             this.tbAgcIncrement.Value = 1;
             this.tbAgcIncrement.ValueChanged += new System.EventHandler(this.PreprocessControlValueChanged);
@@ -206,7 +231,7 @@ namespace SpeexPreprocessor.Demo
             this.tbAgcMaxGain.Maximum = 30;
             this.tbAgcMaxGain.Minimum = 1;
             this.tbAgcMaxGain.Name = "tbAgcMaxGain";
-            this.tbAgcMaxGain.Size = new System.Drawing.Size(581, 45);
+            this.tbAgcMaxGain.Size = new System.Drawing.Size(410, 45);
             this.tbAgcMaxGain.TabIndex = 3;
             this.tbAgcMaxGain.Value = 1;
             this.tbAgcMaxGain.ValueChanged += new System.EventHandler(this.PreprocessControlValueChanged);
@@ -229,7 +254,7 @@ namespace SpeexPreprocessor.Demo
             this.tbAgcLevel.Maximum = 24000;
             this.tbAgcLevel.Minimum = 1;
             this.tbAgcLevel.Name = "tbAgcLevel";
-            this.tbAgcLevel.Size = new System.Drawing.Size(581, 45);
+            this.tbAgcLevel.Size = new System.Drawing.Size(410, 45);
             this.tbAgcLevel.SmallChange = 500;
             this.tbAgcLevel.TabIndex = 1;
             this.tbAgcLevel.TickFrequency = 1000;
@@ -247,33 +272,28 @@ namespace SpeexPreprocessor.Demo
             this.cbAgc.UseVisualStyleBackColor = true;
             this.cbAgc.CheckedChanged += new System.EventHandler(this.PreprocessControlValueChanged);
             // 
-            // cbDenoise
+            // timer1
             // 
-            this.cbDenoise.AutoSize = true;
-            this.cbDenoise.Location = new System.Drawing.Point(129, 20);
-            this.cbDenoise.Name = "cbDenoise";
-            this.cbDenoise.Size = new System.Drawing.Size(65, 17);
-            this.cbDenoise.TabIndex = 9;
-            this.cbDenoise.Text = "Denoise";
-            this.cbDenoise.UseVisualStyleBackColor = true;
-            this.cbDenoise.CheckedChanged += new System.EventHandler(this.PreprocessControlValueChanged);
+            this.timer1.Interval = 200;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // cbDereverb
+            // tbInfo
             // 
-            this.cbDereverb.AutoSize = true;
-            this.cbDereverb.Location = new System.Drawing.Point(248, 19);
-            this.cbDereverb.Name = "cbDereverb";
-            this.cbDereverb.Size = new System.Drawing.Size(70, 17);
-            this.cbDereverb.TabIndex = 10;
-            this.cbDereverb.Text = "Dereverb";
-            this.cbDereverb.UseVisualStyleBackColor = true;
-            this.cbDereverb.CheckedChanged += new System.EventHandler(this.PreprocessControlValueChanged);
+            this.tbInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbInfo.Location = new System.Drawing.Point(441, 224);
+            this.tbInfo.Multiline = true;
+            this.tbInfo.Name = "tbInfo";
+            this.tbInfo.ReadOnly = true;
+            this.tbInfo.Size = new System.Drawing.Size(166, 296);
+            this.tbInfo.TabIndex = 7;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(618, 532);
+            this.Controls.Add(this.tbInfo);
             this.Controls.Add(this.gbPreprocessor);
             this.Controls.Add(this.btnCapture);
             this.Controls.Add(this.textBox1);
@@ -317,6 +337,8 @@ namespace SpeexPreprocessor.Demo
         private System.Windows.Forms.TrackBar tbAgcLevel;
         private System.Windows.Forms.CheckBox cbDereverb;
         private System.Windows.Forms.CheckBox cbDenoise;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.TextBox tbInfo;
     }
 }
 
