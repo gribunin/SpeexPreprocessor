@@ -1,7 +1,7 @@
 # SpeexPreprocessor
 Speex preprocessor wrapper for .NET
 
-**SpeexPreprocessor** is a wrapper around speex preprocessor built in to the speex codec. The original documentation is available here: https://www.speex.org/docs/api/speex-api-reference/group__SpeexPreprocessState.html
+**SpeexPreprocessor** is a wrapper for speex preprocessor built in to the speex codec. The original documentation is available here: https://www.speex.org/docs/api/speex-api-reference/group__SpeexPreprocessState.html
 
 ## How to use
 1. First create an instance of SpeexPreprocessor:
