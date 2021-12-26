@@ -3,6 +3,8 @@ Speex preprocessor wrapper for .NET
 
 **SpeexPreprocessor** is a wrapper for speex preprocessor built in to the speex codec. The original documentation is available here: https://www.speex.org/docs/api/speex-api-reference/group__SpeexPreprocessState.html
 
+All speex preprocessor code is compiled into the wrapper and the library doesn't have any additional dependecies.
+
 This library allows to perform the following operations with audio in .Net program:
 - AGC;
 - Denoise:
