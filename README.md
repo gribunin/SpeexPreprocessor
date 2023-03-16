@@ -1,7 +1,7 @@
 # SpeexPreprocessor
 Speex preprocessor wrapper for .NET
 
-**SpeexPreprocessor** is a wrapper for speex preprocessor built in to the speex codec. The original documentation is available here: https://www.speex.org/docs/api/speex-api-reference/group__SpeexPreprocessState.html
+**SpeexPreprocessor** is a wrapper for the speex codec built-in preprocessor. The original documentation is available here: https://www.speex.org/docs/api/speex-api-reference/group__SpeexPreprocessState.html
 
 All speex preprocessor code is compiled into the wrapper and the library doesn't have any additional dependencies.
 
@@ -11,11 +11,11 @@ This library allows to perform the following operations with audio in .Net progr
 - Dereverberation.
 ## How to use
 1. First create an instance of SpeexPreprocessor:
-```
+```C#
 var preprocessor = new Preprocessor(frameSize, sampleRate);
 ```
 2. Set required properties (AGC, AGC values, Dereverb. Denoise:
-```
+```C#
                 preprocessor.Agc = cbAgc.Checked;
                 preprocessor.Dereverb = cbDereverb.Checked;
                 preprocessor.Denoise = cbDenoise.Checked;
@@ -24,8 +24,8 @@ var preprocessor = new Preprocessor(frameSize, sampleRate);
                 preprocessor.AgcIncrement = tbAgcIncrement.Value;
                 preprocessor.AgcDecrement = tbAgcDecrement.Value;
 ```
-3. Start processing audio (read from file, captured from the sound device or received via network stream:
-```
+3. Start processing audio (read from file, captured from the sound device or received via network stream) in a loop, feeding each audio sample buffer to the preprocessor:
+```C#
 preprocessor.Run(_speexFrameBuffer);
 ```
 
